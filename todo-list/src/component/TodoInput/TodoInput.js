@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 const TodoInput = ({value, onChange, onInsert}) =>{
             //input의 값 //input 내용수정 이벤트 // 추가버튼누를때 실행이벤트
     const handleKeyPress = (e) =>{
-        if(e.key == 'Enter'){
+        if(e.key === 'Enter'){
             onInsert();
         }
     }
