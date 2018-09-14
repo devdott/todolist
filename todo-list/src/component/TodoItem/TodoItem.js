@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 class TodoItem extends Component{
+
+    shouldComponentUpdate(nextProps, nextState){
+        return this.props.done !== nextProps.done;
+    }
     render(){
         const {done, children, onToggle, onRemove} = this.props;
 
@@ -8,7 +12,7 @@ class TodoItem extends Component{
             <div className="todo-item" onClick={onToggle}>
                 <input className="tick" type="checkbox" checked={done} readOnly />
                 <div className={done? 'chek' : 'recheck'}>{children}</div>    
-                <div className="delete" onClick={onRemove}>[지우기]</div>
+                <div className="delete" onClick={(e)=>{onRemove(); e.stopPropagation();}}>[지우기]</div>
             </div>
         )
     }
