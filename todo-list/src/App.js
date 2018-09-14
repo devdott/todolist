@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import PageTemplate from './component/PageTemplate/PageTemplate';
 import TodoInput from './component/TodoInput/TodoInput';
-// import TodoItem from './component/TodoItem/TodoItem';
+// import TodoItem from './components/TodoItem/TodoItem';
 import TodoList from './component/TodoList/TodoList';
-import './main.css';
+// import './main.css';
 
 class App extends Component {
 
@@ -33,15 +33,26 @@ class App extends Component {
       input:''
     });
   }
+  handleToggle = (id) =>{
+    const {todos} = this.state;
+    const index = todos.findIndex(todo => todo.id === id);
+
+    const toggled = {
+      ...todos[index], done : !todos[index].done
+    };
+
+    this.setState({todos : [...todos.slice(0, index), toggled, ...todos.slice(index+1,todos.length)]
+    });
+  }
   render() {
     const {input, todos} = this.state; //비구조화 안했다면 26번째 줄 value는 this.input으로 해야함 
-    const {handleChange, handleInsert} = this; //동일 26번째 줄 onChange의 값
+    const {handleChange, handleInsert, handleToggle} = this; //동일 26번째 줄 onChange의 값
 
     return (
       <div>
         <PageTemplate>
           <TodoInput onChange={handleChange} value={input} onInsert={handleInsert}/>
-          <TodoList todos={todos}/>
+          <TodoList todos={todos} onToggle={handleToggle} />
         </PageTemplate>
       </div>
     );

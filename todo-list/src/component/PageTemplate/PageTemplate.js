@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-// import './main.css';
+import React from 'react';
 
 const PageTemplate = ({children}) =>{
     return (
